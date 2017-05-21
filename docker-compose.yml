@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+  httpd:
+    build: .
+    ports:
+      - 8000:80
+    volumes:
+      #folder with project
+      - ./htdocs:/var/www/html
+  db:
+    image: mysql:5.7
+    volumes:
+      #mysql has issues with permissions, the simplest solution is to put folder for mysql in user catalog /Users/ for mac and /home/ for linux
+      - /Users/ja1/prog/laraver_mysql:/var/lib/mysql
+    restart: always
+    environment:
+      #don't use root! xD
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: database1
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - 3306:3306
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 9000:80
+    environment:
+      PMA_USER: root
+      PMA_PASSWORD: root
