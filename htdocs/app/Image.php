@@ -13,7 +13,7 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
-    	'name', 'src'
+    	'name', 'path', 'product_id'
     ];
 
     public function product()

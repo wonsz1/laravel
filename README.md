@@ -9,7 +9,6 @@ cd laravel
 docker-compose up -d
 docker exec -it docker_id bash
 you can get docker_id by command `docker ps` which list containers
-cd htdocs
 php artisan make:migrations 
 go to http://localhost:8000/public/
 ```

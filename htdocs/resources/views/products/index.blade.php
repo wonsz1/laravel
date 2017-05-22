@@ -9,7 +9,7 @@
         <!-- Display Validation Errors -->
         @include('common.errors')
         <!-- New Product Form -->
-        <form action="{{ url('/product')}} " method="POST" class="form-horizontal">
+        <form action="{{ url('/product')}} " method="POST" class="form-horizontal" enctype="multipart/form-data">
             {{ csrf_field() }}
             <!-- Product Name -->
             <div class="form-group">
@@ -21,6 +21,11 @@
                 <label for="price" class="col-sm-3 control-label">Price</label>
                 <div class="col-sm-9">
                     <input type="text" name="price" id="product-price" class="form-control">
+                </div>
+
+                <label for="image" class="col-sm-3 control-label">Image</label>
+                <div class="col-sm-9">
+                    <input type="file" name="image" id="image" />
                 </div>
 
                 <label for="description" class="col-sm-3 control-label">Description</label>
@@ -65,6 +70,11 @@
                             </td>
                             <td class="table-text">
                                 <div>{{ $product->price }}</div>
+                            </td>
+                            <td class="table-text">
+                                @foreach ($product->images as $image) 
+                                <div><img src="{{ url('uploads') . '/' . $image->path }}" name="{{ $image->name }}" /></div>
+                                @endforeach
                             </td>
                             <td class="table-text">
                                 <div>{{ $product->description }}</div>
