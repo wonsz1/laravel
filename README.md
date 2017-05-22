@@ -1,11 +1,17 @@
-# Simple amp(apache, mysql, php) server using Docker
+# Simple laravel ecommerce based on amp(apache, mysql, php) server using Docker
 
 ### How to use
 
 ```bash
-git clone https://github.com/wonsz1/docker_amp.git
-cd docker_amp/
+git clone https://github.com/wonsz1/laravel.git
+if you want your database data persist then configure proper volumes for db in docker-compose.yml
+cd laravel
 docker-compose up -d
+docker exec -it docker_id bash
+you can get docker_id by command `docker ps` which list containers
+cd htdocs
+php artisan make:migrations 
+go to http://localhost:8000/public/
 ```
 ### Additional
 
