@@ -32,20 +32,22 @@ class ProductController extends Controller
 			'description' => 'required|max:255'
 		]);
 
-		$product = Product::create([ 
-			'name' => $request->name,
-			'price' => $request->price,
-			'description' => $request->description
-		]);
+        $product = Product::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'description' => $request->description
+        ]);
 		
-		if(Input::hasFile('image')){
-			$file = Input::file('image');
-			$file->move('uploads', $file->getClientOriginalName());
+		if($request->hasFile('image')){
+		    $file = $request->file('image');
+            $name = 'image_' . time() . '.' . $file->extension();
 
-			Image::create([
-				'product_id' => $product->id,
-				'path' =>  $file->getClientOriginalName()
-			]);
+            $file->move('uploads', $name);
+
+            Image::create([
+                'product_id' => $product->id,
+                'path' =>  $name,
+            ]);
 		}
 
 		return redirect('/products');
