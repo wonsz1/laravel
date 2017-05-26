@@ -25,6 +25,9 @@ Route::delete('/task/{task}', 'TaskController@destroy');
 
 Route::get('/products', 'ProductController@index');
 Route::post('/product', 'ProductController@store');
+Route::get('/product/{product}', 'ProductController@show');
+Route::get('/product/{product}/edit', 'ProductController@edit');
+Route::put('/product/{product}', 'ProductController@update');
 Route::delete('/product/{product}', 'ProductController@destroy');
 
 Route::get('/images', 'ImageController@index');

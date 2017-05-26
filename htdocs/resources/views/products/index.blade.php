@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if (Session::has('message'))
+    <div class="alert alert-info">{{ Session::get('message') }}</div>
+@endif
+
 <div class="panel panel-default">
     <div class="panel-heading">
         Add Product
@@ -11,27 +16,36 @@
         <!-- New Product Form -->
         <form action="{{ url('/product')}} " method="POST" class="form-horizontal" enctype="multipart/form-data">
             {{ csrf_field() }}
-            <!-- Product Name -->
+
             <div class="form-group">
                 <label for="product" class="col-sm-3 control-label">Product</label>
                 <div class="col-sm-9">
                     <input type="text" name="name" id="product-name" class="form-control">
                 </div>
+            </div>
 
+            <div class="form-group">
                 <label for="price" class="col-sm-3 control-label">Price</label>
                 <div class="col-sm-9">
                     <input type="text" name="price" id="product-price" class="form-control">
                 </div>
+            </div>
 
+            <div class="form-group">
                 <label for="image" class="col-sm-3 control-label">Image</label>
                 <div class="col-sm-9">
                     <input type="file" name="image" id="image" />
                 </div>
+            </div>
 
+            <div class="form-group">
                 <label for="description" class="col-sm-3 control-label">Description</label>
                 <div class="col-sm-9">
                     <input type="textarea" name="description" id="product-description" class="form-control">
                 </div>
+            </div>
+
+            <div class="form-group">
                 <div class="col-sm-3">
                     <button type="submit" class="btn btn-default">
                         <i class="fa fa-plus"></i> Add
@@ -81,6 +95,7 @@
                             </td>
 
                             <td>
+                                <a href="{{ url('/product/' . $product->id . '/edit') }}" class="btn btn-primary">Edit</a>
                                 <form action="{{ url('/product/' . $product->id) }}" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
