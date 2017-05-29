@@ -15,6 +15,7 @@ class ProductController extends Controller
 
 	public function __construct(Image $image)
 	{
+        $this->middleware('auth');
 		$this->images = $image;
 	}
 
@@ -97,6 +98,18 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->save();
+
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $name = 'image_' . time() . '.' . $file->extension();
+
+            $file->move('uploads', $name);
+
+            Image::create([
+                'product_id' => $product->id,
+                'path' =>  $name,
+            ]);
+        }
 
         Session::flash('message', 'Successfully updated product!');
         return redirect('/products');
