@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Repositories\ImageRepository;
 use App\Product;
 use App\Image;
+use Intervention\Image\ImageManager;
 
 class ProductController extends Controller
 {
@@ -48,10 +49,7 @@ class ProductController extends Controller
         ]);
 		
 		if($request->hasFile('image')){
-		    $file = $request->file('image');
-            $name = 'image_' . time() . '.' . $file->extension();
-
-            $file->move('uploads', $name);
+		    $name = $this->imageUpload($request->file('image'));
 
             Image::create([
                 'product_id' => $product->id,
@@ -62,6 +60,39 @@ class ProductController extends Controller
         Session::flash('message', 'Successfully added product!');
 		return redirect('/products');
 	}
+
+    //[TODO] przerzucic to do jakiegoś helpera czy coś
+    private function imageUpload($file)
+    {
+        $nameBig = 'image_' . time() . '-big.' . $file->extension();
+        $nameSmall = 'image_' . time() . '.' . $file->extension();
+
+        $manager = new ImageManager();
+        $img = $manager->make($file);
+  
+        if ($img->height() > $img->width()) {
+            //change height first
+            $this->resizeAndSave($img, $nameBig, null, 500);
+            $this->resizeAndSave($img, $nameSmall, null, 250);
+        } else {
+            //change width first
+            $this->resizeAndSave($img, $nameBig, 500, null);
+            $this->resizeAndSave($img, $nameSmall, 250, null);
+        }
+
+        return $nameSmall;
+    }
+
+    //[TODO] przerzucic to do jakiegoś helpera czy coś
+    private function resizeAndSave($img, $name, $size1, $size2)
+    {
+        $img->resize($size1, $size2, function ($constraint) {
+            $constraint->aspectRatio();
+        })
+        ->resizeCanvas($size2, $size1, 'center', false, '000000');
+        
+        $img->save('uploads/' . $name);
+    }
 
     /**
      * @param int $id
