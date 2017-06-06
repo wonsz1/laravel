@@ -100,7 +100,7 @@ class ProductController extends Controller
      */
 	public function show($id)
 	{
-		return view('product.show', [
+		return view('products.show', [
 			'product' => Product::findOrFail((int) $id)
 		]);
 	}
@@ -121,7 +121,7 @@ class ProductController extends Controller
         $this->validate($request, [
             'name' => 'required|max:128',
             'price' => 'required|numeric',
-            'description' => 'required|max:255'
+            'description' => 'required'
         ]);
 
         $product = Product::findOrFail((int) $id);

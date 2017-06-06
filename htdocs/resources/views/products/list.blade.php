@@ -30,11 +30,11 @@
                         <div class="caption">
                             <h4 class="group inner list-group-item-heading">{{ $product->name }}</h4>
                             <div class="row">
-                                <div class="col-xs-12 col-md-6">
-                                    <span class="lead">${{ $product->price }}</span>
+                                <div class="col-xs-12 col-md-12">
+                                    <span class="full-span">${{ $product->price }}</span>
                                 </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-success" href="">BIERZZ MNIE</a>
+                                <div class="col-xs-12 col-md-12">
+                                    <a class="btn btn-success btn-block" href="{{ url('/product/' . $product->id) }}">View</a>
                                 </div>
                             </div>
                         </div>
