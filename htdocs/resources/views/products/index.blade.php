@@ -90,9 +90,6 @@
                                 <div><img src="{{ url('uploads') . '/' . $image->path }}" name="{{ $image->name }}" /></div>
                                 @endforeach
                             </td>
-                            <td class="table-text">
-                                <div>{{ $product->description }}</div>
-                            </td>
 
                             <td>
                                 <a href="{{ url('/product/' . $product->id . '/edit') }}" class="btn btn-primary">Edit</a>
@@ -108,6 +105,10 @@
                     @endforeach
                     </tbody>
                 </table>
+
+                <div class="row">
+                    {{ $products->links() }}
+                </div>
             </div>
         </div>
     @endif

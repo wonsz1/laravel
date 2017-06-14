@@ -9,7 +9,7 @@
 @if (count($products) > 0)
 <div class="panel panel-default">
     <div class="panel-heading">
-        Add Product
+        Most popular
     </div>
     <div class="panel-body">
         <div class="row">
