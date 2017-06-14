@@ -27,15 +27,15 @@
                     <div class="col-xs-12 col-md-12">
                         <div class="input-group quantity-buttons">
                               <span class="input-group-btn">
-                                  <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
+                                  <button type="button" class="btn btn-danger btn-number"  data-type="minus">
                                     <span class="glyphicon glyphicon-minus"></span>
                                   </button>
                               </span>
                               
-                              <input type="text" name="quant[2]" class="form-control input-number text-center" value="1" min="1" max="100">
+                              <input type="text" name="qty" class="form-control input-number text-center" value="1" min="1" max="100">
                               
                               <span class="input-group-btn">
-                                  <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+                                  <button type="button" class="btn btn-success btn-number" data-type="plus">
                                       <span class="glyphicon glyphicon-plus"></span>
                                   </button>
                               </span>

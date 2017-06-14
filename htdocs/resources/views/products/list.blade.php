@@ -19,7 +19,7 @@
             <div class="row">
             @endif
                 <div class="item  col-sm-4 col-md-3">
-                    <div class="thumbnail">
+                    <div class="thumbnail hvr-grow">
                         @foreach ($product->images as $image) 
                         <img class="group list-group-image" src="{{ url('uploads') . '/' . $image->path }}" name="{{ $image->name }}"/>
                         @endforeach
@@ -42,6 +42,10 @@
                 </div>
             @endforeach
         </div>
+        <div class="row">
+            {{ $products->links() }}
+        </div>
+            
 </div>
 </div>
 @endif

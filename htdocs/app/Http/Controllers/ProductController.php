@@ -39,7 +39,7 @@ class ProductController extends Controller
 		$this->validate($request, [
 			'name' => 'required|max:128',
 			'price' => 'required|numeric',
-			'description' => 'required|max:255'
+			'description' => 'required'
 		]);
 
         $product = Product::create([
