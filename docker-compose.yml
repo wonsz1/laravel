@@ -8,6 +8,7 @@ services:
     volumes:
       #folder with project
       - ./htdocs:/var/www/html
+    working_dir: /var/www/html/public
   db:
     image: mysql:5.7
     restart: always
